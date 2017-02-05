@@ -47,7 +47,8 @@ init_app()
 q1 = db.session.query(Brand).filter_by(brand_id='ram').one()
 
 # Get all models with the name "Corvette" and the brand_id "che."
-q2 = db.session.query(Model).filter(Model.name == 'Corvette', Model.brand_id == 'che').all()
+q2 = db.session.query(Model).filter(Model.name == 'Corvette',
+                                    Model.brand_id == 'che').all()
 
 # Get all models that are older than 1960.
 q3 = db.session.query(Model).filter(Model.year > 1960).all()
@@ -59,11 +60,13 @@ q4 = db.session.query(Brand).filter(Brand.founded > 1920).all()
 q5 = db.session.query(Model).filter(Model.name.like('Cor%')).all()
 
 # Get all brands that were founded in 1903 and that are not yet discontinued.
-q6 = db.session.query(Brand).filter(Brand.founded == 1903, Brand.discontinued == None).all()
+q6 = db.session.query(Brand).filter(Brand.founded == 1903,
+                                    Brand.discontinued == None).all()
 
 # Get all brands that are either 1) discontinued (at any time) or 2) founded
 # before 1950.
-q7 =db.session.query(Brand).filter( db.or_(Brand.discontinued != None, Brand.founded < 1950) ).all()
+q7 =db.session.query(Brand).filter(db.or_(Brand.discontinued != None,
+                                           Brand.founded < 1950)).all()
 
 # Get any model whose brand_id is not "for."
 q8 = db.session.query(Model).filter(Model.brand_id != 'for').all()
@@ -104,7 +107,9 @@ def search_brands_by_name(mystr):
     """Returns all Brand objects corresponding to brands whose names include
     the given string."""
 
-    brand_objs = db.session.query(Brand).filter(Brand.name.like('%'+mystr+'%')).all()
+    brand_objs = db.session.query(Brand).filter(Brand.name.
+                                                like('%'+mystr+'%')).all()
+
     print brand_objs
     return brand_objs
 
@@ -113,8 +118,11 @@ def get_models_between(start_year, end_year):
     """Returns all Model objects corresponding to models made between
     start_year (inclusive) and end_year (exclusive)."""
 
-    model_objs = db.session.query(Model).filter(Model.year >= start_year, Model.year < end_year).all()
+    model_objs = db.session.query(Model).filter(Model.year >= start_year,
+                                                Model.year < end_year).all()
+
     print model_objs
+    return model_objs
 
 # Testing the functions by calling them
 
